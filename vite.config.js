@@ -9,10 +9,11 @@ import getEnvVars from '@bangle.io/env-vars';
 
 const argv = require('minimist')(process.argv.slice(2));
 
-export default defineConfig(async ({ command, mode }) => {
-  const isProduction = mode === 'production';
+
+export default defineConfig(async ({ command }) => {
+  const isProduction = process.env.NODE_ENV === 'production';
   const envVars = await getEnvVars({
-    isProduction: isProduction,
+    isProduction,
     isVite: true,
   });
 
@@ -33,7 +34,7 @@ export default defineConfig(async ({ command, mode }) => {
     console.info('**** RUNNING IN HOT RELOAD MODE ****');
   }
 
-  const appEnv = envVars.appEnv;
+  const appEnv = 'production';
   let sourcemap = true;
   // if (appEnv === 'production') {
   //   sourcemap = false;
@@ -191,12 +192,13 @@ function generateManifest(appEnv) {
     ];
   }
   const manifest = {
-    name: 'bangle.io' + (isProd ? '' : '/' + appEnv),
-    short_name: 'bangle',
+    name: 'Deviosa Notes',
+    short_name: 'Notes',
     theme_color: '#ffffff',
     background_color: '#ffffff',
     display: 'minimal-ui',
-    start_url: '/?type=installed_pwa',
+    start_url: 'https://notes.deviosa.com/?type=installed_pwa',
+    scope: 'https://notes.deviosa.com/',
     icons,
   };
 
