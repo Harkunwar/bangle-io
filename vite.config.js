@@ -196,7 +196,7 @@ function generateManifest(appEnv) {
     short_name: 'Notes',
     theme_color: '#ffffff',
     background_color: '#ffffff',
-    display: 'minimal-ui',
+    display: 'standalone',
     start_url: 'https://notes.deviosa.com/?type=installed_pwa',
     scope: 'https://notes.deviosa.com/',
     icons,
